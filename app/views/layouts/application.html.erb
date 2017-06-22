@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsApp</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>RailsApp</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body class="body">
+
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "sample app", home_path, id: "logo" %></li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Home", home_path %></li>
+      <li><%= link_to "Help", help_path %></li>
+      <% if logged_in? %>
+          <li><%= link_to current_user.username, user_path({id:current_user.id}) %></li>
+          <li><%= link_to "Log out", logout_path, method: :delete %></li>
+    <% else %>
+          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "Sign up", signup_path %></li>
+      <% end %>
+
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
 </html>
