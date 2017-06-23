@@ -1,14 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if logged_in?&&params[:id].to_s==current_user.id.to_s %>
+    <div class="jumbotron">
+      <h2>Share Your Own Image</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_tag upload_path, :multipart => true,class: :form do%>
+            <div class="form-group">
+              <%= label_tag :Title%>
+              <%= text_field_tag :title ,nil,class: 'form-control'%>
+            </div>
+            <div class="form-group">
+              <%= file_field_tag :localfile %>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Upload" ,class:'btn btn-success'%>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+<%= render 'static_pages/image' ,images:@images %>

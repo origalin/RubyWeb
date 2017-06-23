@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
+
   get 'sessions/new'
 
   get '/home', to: 'static_pages#home'
-
-  get '/help', to: 'static_pages#help'
 
   get '/signup', to: 'users#new'
 
@@ -12,6 +11,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
 
   delete '/logout', to: 'sessions#destroy'
+
+  post '/upload' , to: 'images#store'
+
+  post '/comment' ,to: 'comments#create'
   root 'static_pages#home'
 
   resources :images

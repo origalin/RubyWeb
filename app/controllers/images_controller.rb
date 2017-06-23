@@ -21,6 +21,19 @@ class ImagesController < ApplicationController
   def edit
   end
 
+  def store
+    up_file = params[:localfile]
+    myfile = MyuploaderUploader.new(current_user.id)
+    myfile.store!(up_file)
+    image = Image.new(title: params[:title])
+    image.user = current_user
+    image.url = MyuploaderUploader.store_dir+"/"+myfile.filename
+    if image.save
+      redirect_to home_path
+    end
+  end
+
+
   # POST /images
   # POST /images.json
   def create

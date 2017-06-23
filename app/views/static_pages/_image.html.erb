@@ -1,0 +1,49 @@
+<% if @images.length > 0 %>
+<%@images.reverse.each_with_index do|image, index| %>
+    <% user = image.user %>
+    <div class="image_wrapper">
+      <div class="title_wrapper">
+        <p class="title"><span class="username"><%=link_to user.username,user_path(user.id)%>: </span><%=image.title %></p>
+      </div>
+      <div class="image_field">
+        <img src="/<%= image.url%>" width="80%">
+      </div>
+      <div class="comment_wrapper">
+        <% if image.comments.length>0 %>
+            <div class="comment_title"><p>Comments</p></div>
+        <% end %>
+        <%for comment in image.comments %>
+            <div class="comment_line">
+              <p><span class="comment_user"><%=link_to comment.user.username,user_path(comment.user.id) %>: </span><%= comment.context %></p>
+            </div>
+        <%end%>
+        <% if logged_in? %>
+            <div class="comment_form">
+              <div class="row">
+                <a data-toggle="collapse" data-target="#demo<%=index%>">:Add Comment</a>
+              </div>
+              <div id = 'demo<%=index%>' class="collapse">
+                <%= form_tag comment_path,method: :post , class:'form' do%>
+                    <div class="form-group">
+                      <%= text_area_tag :context ,nil ,class:'form-control' %>
+                      <%= hidden_field_tag(:image_id, image.id) %>
+                      <%= hidden_field_tag(:user_id, current_user.id) %>
+                    </div>
+                    <div class="form-group">
+                      <%= submit_tag "send",class:'btn btn-success'%>
+                    </div>
+                <% end %>
+              </div>
+
+            </div>
+        <% end %>
+      </div>
+    </div>
+<%end%>
+<% else %>
+    <div class="image_wrapper">
+      <div class="title_wrapper">
+        <p class="title">No Images To Show</p>
+      </div>
+    </div>
+<% end %>

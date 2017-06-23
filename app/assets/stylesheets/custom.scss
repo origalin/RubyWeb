@@ -3,6 +3,12 @@
 body.body{
   margin-top: 0;
 }
+a{
+  color: #120c6a;
+  :hover{
+    color: #1a0dab;
+  }
+}
 #logo {
   float: left;
   margin-right: 10px;
@@ -12,4 +18,54 @@ body.body{
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+}
+.title_wrapper{
+  margin: 5px;
+  font-weight: bold;
+  color: grey;
+  border-left: 5px lightgray solid;
+  padding: 7px;
+  .title{
+    font-size: 30px;
+    margin: 0;
+    padding: 7px;
+    .username{
+      font-size: 20px;
+    }
+  }
+}
+.image_field{
+  text-align: center;
+}
+.comment_wrapper{
+  margin: 20px;
+  .comment_title{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
+
+  }
+  .comment_line{
+    background-color: whitesmoke;
+    padding: 5px;
+    border-left: 3px gray solid;
+    margin: 5px;
+    p{
+      margin: 0;
+      .comment_user{
+        padding: 3px;
+        font-weight: bold;
+      }
+    }
+  }
+  .comment_form{
+    padding: 5px;
+    div{
+      a{
+        font-weight: bold;
+        cursor: pointer;
+        float: right;
+      }
+    }
+  }
 }
